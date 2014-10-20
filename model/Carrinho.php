@@ -7,20 +7,21 @@
 
 		private $id;
 		private $produtos;
+		private $pcount;
 		private $usuario;
 
-		public function __construct(Usuario &$dono) {
+		public function __construct() {
 			$this->id = getUniqid();
-			$this->usuario = $dono;
 			$this->produtos = array();
+			$this->pcount = array();
 		}
 
 		public function getId() {
 			return $this->id;
 		}
 
-		public function addProduto(Produto &$item) {
-			$this->produtos[$item->getId()] = $item;
+		public function addProduto(Produto &$item, $quantidade) {
+			$this->produtos[$item->getId()] = array($item, $quantidade);
 		}
 
 		public function removeProduto($id) {
@@ -29,8 +30,34 @@
 			return $rem;
 		}
 
+		public function getProdutos() {
+			return $this->produtos;
+		}
+
 		public function iterator() {
 			return null;
+		}
+
+	}
+
+	class CarrinhoIterator {
+
+		private $list;
+		private $keys;
+		private $i;
+
+		public function __construct(Carrinho &$c) {
+			$this->list = $c->getProdutos();
+			$this->keys = array_keys($this->list);
+			$this->i = -1;
+		}
+
+		public function hasNext() {
+			return $this->i < count($this->keys);
+		}
+
+		public function next() {
+			return $this->list[ $this->keys[ ++$this->i ] ];
 		}
 
 	}

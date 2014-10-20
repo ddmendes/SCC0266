@@ -36,6 +36,10 @@
 			$this->pagamento = $pagamento;
 		}
 
+		public function getTotal() {
+			return $this->compra->getTotal();
+		}
+
 	}
 
 ?>
