@@ -18,6 +18,22 @@
 		return $bfish == crypt($senha, $bfish);
 	}
 
+	function newMysqli() {
+		$m = new mysqli('localhost', 'root', '', 'ecomm');
+		if($mysqli->connect_errno) {
+			die('Não foi possível se conectar à  base de dados.');
+		}
+		return $m;
+	}
+
+	function fetchAllAsObject($result) {
+		$array = array();
+		while($obj = $result->fetch_object()){
+			$array[] = $obj;
+		}
+		return $array;
+	}
+
 	class SessionManager {
 
 		private $session = null;
@@ -37,6 +53,10 @@
 
 		public function getSession() {
 			return $this->session;
+		}
+
+		public function closeSession() {
+			session_destroy();
 		}
 
 	}

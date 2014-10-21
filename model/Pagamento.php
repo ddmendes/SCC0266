@@ -25,12 +25,10 @@
 
 		private $id;
 		private $cartao;
-		private $ordemPagamento
 
-		public function __construct(Cartao &$cartao, OrdemDePagamento &$ordemPagamento) {
+		public function __construct(Cartao &$cartao) {
 			$this->id = getUniqid();
 			$this->cartao = $cartao;
-			$this->ordemPagamento = $ordemPagamento;
 		}
 
 		public function autenticarPagamento() {
@@ -50,6 +48,20 @@
 			$this->cartao = $cartao;
 		}
 
+		public function toArray() {
+			return array(
+					'pag_id' => $this->id,
+					'autenticacao' => $this->getAutenticacao(),
+					'tipo' => 'c',
+					'nome' => $this->cartao->getPortador(),
+					'cpf' => $this->cartao->getCpfPortador(),
+					'b_endereco' => '',
+					'c_cod' => $this->cartao->getCodigo(),
+					'c_cod_seg' => $this->cartao->getCodSeguranca(),
+					'c_validade' => $this->cartao->getValidade()
+				);
+		}
+
 
 	}
 
@@ -57,12 +69,10 @@
 
 		private $id;
 		private $sacado;
-		private $ordemPagamento;
 
-		public function __construct(Sacado &$sacado, OrdemDePagamento &$ordemPagamento) {
+		public function __construct(Sacado &$sacado) {
 			$this->id = getUniqid();
 			$this->sacado = $sacado;
-			$this->ordemPagamento = $ordemPagamento;
 		}
 
 		public function autenticarPagamento() {
@@ -80,6 +90,20 @@
 
 		public function setSacado(Sacado &$sacado) {
 			$this->sacado = $sacado;
+		}
+
+		public function toArray() {
+			return array(
+					'pag_id' => $this->id,
+					'autenticacao' => $this->getAutenticacao(),
+					'tipo' => 'b',
+					'nome' => $this->sacado->getNome(),
+					'cpf' => $this->sacado->getCpf(),
+					'b_endereco' => $this->sacado->getEndereco(),
+					'c_cod' => '',
+					'c_cod_seg' => '',
+					'c_validade' => ''
+				);
 		}
 
 	}

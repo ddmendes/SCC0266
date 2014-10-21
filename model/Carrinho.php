@@ -35,7 +35,7 @@
 		}
 
 		public function iterator() {
-			return null;
+			return new CarrinhoIterator($this);
 		}
 
 	}

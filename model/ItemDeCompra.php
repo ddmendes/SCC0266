@@ -5,24 +5,18 @@
 
 	class ItemDeCompra extends Produto {
 
-		private $id;
 		private $produto;
 		private $quantidade;
 		private $preco;
 
 		public function __construct(Produto &$base, $quantidade, $preco = null) {
-			$this->id = getUniqid();
 			$this->produto = $base;
 			$this->quantidade = $quantidade;
 			$this->preco = $preco ? $preco : $base->getPreco();
 		}
 
 		public function getId() {
-			return $this->id;
-		}
-
-		public function getId() {
-			return $this->id;
+			return $this->produto->getId();
 		}
 
 		public function getNome() {
@@ -63,6 +57,14 @@
 
 		public function setQuantidade($quantidade) {
 			$this->quantidade = $quantidade;
+		}
+
+		public function toArray() {
+			return array(
+					'pdt_id'    => $this->getId(),
+					'preco'      => $this->preco,
+					'quantidade' => $this->quantidade
+				);
 		}
 
 	}

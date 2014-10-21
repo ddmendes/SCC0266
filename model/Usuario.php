@@ -62,6 +62,16 @@
 			$this->senha = $senha;
 		}
 
+		public function toArray() {
+			return array(
+					'nome'     => $this->nome,
+					'cpf'      => $this->cpf,
+					'endereco' => $this->endereco,
+					'email'    => $this->email,
+					'senha'    => $this->senha
+				);
+		}
+
 	}
 
 ?>

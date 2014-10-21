@@ -23,7 +23,7 @@
 		}
 
 		public function getCodigo(codigo) {
-			return $this->;
+			return $this->codigo;
 		}
 
 		public function setCodigo($codigo) {

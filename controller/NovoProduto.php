@@ -1,6 +1,6 @@
 <?php
 
-	include '../model/Produto.php';
+	include '../service/ProdutoService.php';
 
 	if(isset($_POST['nome'])) {
 

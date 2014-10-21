@@ -12,12 +12,12 @@
 	$oprepo = OrdemDePagamentoRepository::getInstance();
 	if(isset($_POST['pagamento']) && $_POST['pagamento'] == 'cartao') {
 		$cartao = new Cartao($_POST['codigo'], $_POST['cod_seguranca'], $_POST['nome'], $_POST['cpf'], $_POST['validade']);
-		$pagamento = new PagamentoViaCartao($cartao, $oprepo->get($_POST['ordem_pagamento']));
+		$pagamento = new PagamentoViaCartao($cartao);
 	} else {
 		$sacado = new Sacado($_POST['nome'], $_POST['cpf'], $_POST['endereco']);
-		$pagamento = new PagamentoViaBoleto($sacado, $oprepo->get($_POST['ordem_pagamento']));
+		$pagamento = new PagamentoViaBoleto($sacado);
 	}
-	if(PagamentoService::validarPagamento($pagamento)) {
+	if(PagamentoService::validarPagamento($pagamento, $_POST['orp_id'])) {
 		//on success
 	} else {
 		//on failure

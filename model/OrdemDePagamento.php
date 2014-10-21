@@ -40,6 +40,14 @@
 			return $this->compra->getTotal();
 		}
 
+		public function toArray() {
+			return array(
+					'orp_id' => $this->id,
+					'cmp_id' => $this->compra->getId();
+					'pag_id' => $this->pagamento->getId();
+				);
+		}
+
 	}
 
 ?>

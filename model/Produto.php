@@ -10,12 +10,16 @@
 		private $preco;
 		private $peso;
 
-		public function __construct($nome, $descricao, $preco, $peso) {
-			$this->id = getUniqid();
+		public function __construct($nome, $descricao, $preco, $peso, $id = null) {
+			$this->id = $id ? $id : getUniqid();
 			$this->nome = $nome;
 			$this->descricao = $descricao;
 			$this->preco = $preco;
 			$this->peso = $peso;
+		}
+
+		public function getId() {
+			return $this->id;
 		}
 
 		public function getNome() {
@@ -48,6 +52,16 @@
 
 		public function setPeso($peso) {
 			$this->peso = $peso;
+		}
+
+		public function toArray() {
+			return array(
+					'id'       => $this->id,
+					'nome'     => $this->nome,
+					'descrcao' => $this->descricao,
+					'preco'    => $this->preco,
+					'peso'     => $this->peso
+				);
 		}
 
 	}
