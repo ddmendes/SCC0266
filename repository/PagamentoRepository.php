@@ -40,7 +40,7 @@
 			$p = null;
 			if($res) {
 				$pobj = $res->fetch_object();
-				if($pobj['tipo'] == 'c') {
+				if($pobj['tipo'] == 'b') {
 					$sacado = new Sacado($pobj['nome'], $pobj['cpf'], $pobj['b_endereco']);
 					$p = new PagamentoViaBoleto($sacado);
 				} else {

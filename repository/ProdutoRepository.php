@@ -53,6 +53,15 @@
 			return $p;
 		}
 
+		public function getList($ignorar, $limite) {
+			$mysqli = newMysqli();
+			$res = $mysqli->query("SELECT * FROM produto LIMIT $ignorar, $limite");
+			$ret = fetchAllAsObject($res);
+			$res->free();
+			$mysqli->close();
+			return $ret;
+		}
+
 		public static function getInstance() {
 			if(ProdutoRepository::$instance == null) {
 				ProdutoRepository::$instance = new ProdutoRepository();
